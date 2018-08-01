@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "sahaby",
+    "description": "This project is really great.",
+    "slug": "sahaby",
+    "privacy": "public",
+    "sdkVersion": "29.0.0",
+    "platforms": ["ios", "android"],
+    "version": "1.0.0",
+    "facebookScheme": "fb1310780835722582",
+    "facebookAppId": "1310780835722582",
+    "facebookDisplayName": "Sahaby",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
