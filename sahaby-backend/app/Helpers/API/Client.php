@@ -66,6 +66,6 @@ class Client
      */
     public static function respondError($errorCode = 500, $message = "", $data = "", $extraHeaders = [])
     {
-        return self::respond($statusCode, $message, $data, $extraHeaders);
+        return self::respond($errorCode, $message, $data, $extraHeaders);
     }
 }
