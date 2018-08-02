@@ -90,6 +90,7 @@ class Login extends Component {
           borderWidth: 1,
           borderColor: '#985830',
           marginTop: 20,
+          fontFamily: 'arimo-bold',
         }}
         onPress={ () => {
           this.props.navigation.navigate('LoginSecond');

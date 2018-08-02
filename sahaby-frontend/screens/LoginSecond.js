@@ -64,10 +64,13 @@ class LoginSecond extends Component {
           width: 220,
           paddingVertical: 10,
           backgroundColor: '#985830',
-          borderRadius: 2,
+          borderRadius: 8,
           borderWidth: 1,
           borderColor: '#985830',
           marginTop: 70,
+          fontFamily: 'arimo-bold',
+          fontWeight: 600,
+          height: 48,
         }}
         onPress={ () => {
           if(this.state.phone === '') {
@@ -77,7 +80,7 @@ class LoginSecond extends Component {
             {/* this.loginWithFacebook(); */}
           }
         }}>
-          <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold', fontFamily: 'arimo'}}>GET STARTED</Text>
+          <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold', fontFamily: 'arimo-bold'}}>GET STARTED</Text>
         </TouchableOpacity>
         
       </View>

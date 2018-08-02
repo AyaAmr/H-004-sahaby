@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Expo, { Facebook, Notifications } from 'expo';
 import axios from 'axios';
 import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator, Image, TextInput } from 'react-native';
-import { FONT_WEIGHT } from '../components';
+import { FONT_WEIGHT, NativePicker } from '../components';
 // import registerForNotifications from '../services/push_notifications';
 
 
@@ -14,64 +14,90 @@ class LoginThird extends Component {
     this.state = {
       country: '',
       language: '',
+      errorCountry: '',
+      errorLanguage: '',
     }
   }
 
   componentDidMount() {
 
   }
-  
+  setSelectedCountry = (country) => {
+    this.setState({ country });
+  }
+  setSelectedLanguage = (language) => {
+    this.setState({ language });
+  }
  
   render() {
+    const languages = [
+      { label: 'English', value: 0 },
+      { label: 'Arabic', value: 1 },
+      { label: 'French', value: 2 },
+      { label: 'German', value: 3 },
+      { label: 'Indian', value: 4 },
+      { label: 'Japanese', value: 5 },
+    ];
+    const countries = [
+      { label: 'Saudi Arabia', value: 0 },
+      { label: 'Egypt', value: 1 },
+      { label: 'Bahrain', value: 2 },
+      { label: 'USA', value: 3 },
+    ];
 
     return (
       <View style={styles.container}>
-
         <View style={{ marginTop: 37 }}>
-          <Text style={{ color: '#9B9B9B', fontSize: 14, fontFamily: 'arimo' }} >Phone number</Text>
-          <TextInput
-            style={{
-              width: '100%',
+          <Text style={{ color: '#9B9B9B', fontSize: 14, fontFamily: 'arimo', marginBottom: 10 }} >Country</Text>
+          <NativePicker
+            options={countries}
+            pickerStyle={{
+              height: 40,
+              borderColor: '#e6e6e6',
               width: 280,
-              height: 48,
-              borderWidth: 1,
-              borderColor: '#F1F1F1',
-              paddingHorizontal: 16,
-              borderRadius: 8,
-              marginTop: 10,
-              color: '#000',
-              fontFamily: 'arimo-italic',
-              fontSize: 16,
+              justifyContent: 'space-between',
             }}
-            underlineColorAndroid='rgba(0, 0, 0, 0)'
-            autoCorrect={false}
-            keyboardType = {'numeric'}
-            placeholder = {'Phone number'}
-            onChangeText={ (text) => {
-              this.setState({ phone: text });
-            }}
-            value={this.state.phone}
+            pickerTextStyle={{ fontSize: 16, color: '#000', fontFamily: 'arimo-italic' }}
+            selectedValue={(option) => { this.setSelectedCountry(option); }}
           />
-          <Text style={{ color: 'red', fontSize: 14, fontFamily: 'arimo' }} >{this.state.error}</Text>
+          <Text style={{ color: 'red', fontSize: 14, fontFamily: 'arimo' }} >{this.state.errorCountry}</Text>
+        </View>
+        <View style={{ marginTop: 35 }}>
+          <Text style={{ color: '#9B9B9B', fontSize: 14, fontFamily: 'arimo', marginBottom: 10 }} >Language</Text>
+          <NativePicker
+            options={languages}
+            pickerStyle={{
+              height: 40,
+              width: 280,
+              justifyContent: 'space-between',
+            }}
+            pickerTextStyle={{ fontSize: 16, color: '#000', fontFamily: 'arimo-italic' }}
+            selectedValue={(option) => { this.setSelectedLanguage(option); }}
+          />
+          <Text style={{ color: 'red', fontSize: 14, fontFamily: 'arimo' }} >{this.state.errorCountry}</Text>
         </View>
         <TouchableOpacity style={{
           width: 220,
           paddingVertical: 10,
           backgroundColor: '#985830',
-          borderRadius: 2,
+          borderRadius: 8,
           borderWidth: 1,
           borderColor: '#985830',
           marginTop: 70,
+          height: 48,
         }}
         onPress={ () => {
-          if(this.state.phone === '') {
-            this.setState({ error: 'Please enter a phone number' });
-          } else {
-            // Submit Here
-            {/* this.loginWithFacebook(); */}
+          if(this.state.language === '') {
+            this.setState({ errorLang: 'Please select a language' });
+          }
+          if(this.state.country === '') {
+            this.setState({ errorLang: 'Please select a country' });
+          }
+          if (this.state.country !== '' && this.state.language !== '') {
+            // Go somewhere
           }
         }}>
-          <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold', fontFamily: 'arimo'}}>GET STARTED</Text>
+          <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold', fontFamily: 'arimo-bold', fontSize: 13, marginTop: 5}}>GET STARTED</Text>
         </TouchableOpacity>
         
       </View>
