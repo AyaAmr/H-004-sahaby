@@ -1,43 +1,54 @@
-import React from 'react';
-import Expo from 'expo';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import Voice from 'react-native-voice';
+import React, { Component } from 'react';
+import Expo, { Facebook, Notifications, Font } from 'expo';
+import axios from 'axios';
+import { StatusBar } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator } from 'react-native';
+import { Container, Button, Text } from 'native-base';
+import { createStackNavigator } from 'react-navigation';
+import { Login, LoginSecond } from './screens';
 
 
-export default class App extends React.Component {
-  
+const MainNav = createStackNavigator({
+  Login: {
+    screen: Login,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+  LoginSecond: {
+    screen: LoginSecond,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+}, { initialRouteName: 'Login' });
+
+
+export default class App extends Component {
+  state = {
+    fontLoaded: false,
+  };
   constructor(props) {
     super(props);
-    Voice.onSpeechStart = this.onSpeechStartHandler.bind(this);
-    Voice.onSpeechEnd = this.onSpeechEndHandler.bind(this);
-    Voice.onSpeechResults = this.onSpeechResultsHandler.bind(this);
   }
-  componentDidMount() {
-    getLocationAsync();
+  
+  async componentDidMount() {
+    await Font.loadAsync({
+      'lateef': require('./assets/fonts/Lateef.ttf'),
+      'arimo': require('./assets/fonts/Arimo.ttf'),
+    });
+    this.setState({ fontLoaded: true });
+  
   }
-  onStartButtonPress(e){
-    Voice.start('en-US');
-  }
-  async function getLocationAsync() {
-    const { Permissions } = Expo;
-    const { status } = await Permissions.getAsync(Permissions.NSMicrophoneUsageDescription);
-    const { status1 } = await Permissions.getAsync(Permissions.NSSpeechRecognitionUsageDescription);
-    if (status !== 'granted') {
-      alert('Hey! You might want to enable notifications for my app, they are good.');
-    }
-    if (status1 !== 'granted') {
-      alert('Hey!!! You might want to enable notifications for my app, they are good.');
-    }
-  }
+ 
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <TouchableOpacity onClick={ () => this.onStartButtonPress()}>Voicee</TouchableOpacity>
+    if(this.state.fontLoaded) {
+      return(<MainNav/>);
 
-
-      </View>
-    );
+    } else {
+      return <View></View>
+    }
+    
   }
 }
 
