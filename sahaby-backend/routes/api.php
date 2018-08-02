@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Middleware\JwtAuth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,5 @@ Route::post('auth/login_with_fb', 'SocialAuthController@loginWithFb');
 Route::post('auth/user/signup', 'AuthController@userSignUp');
 Route::post('auth/user/login', 'AuthController@userLogin');
 Route::post('auth/volunteer/login', 'AuthController@volunteerLogin');
+Route::post('users/create_profile', 'UserController@createProfile')->middleware(JwtAuth::class);
+Route::get('languages', 'LanguageController@index');

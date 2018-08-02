@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('verfication_code')->nullable();
             $table->integer('gender')->nullable();
             $table->integer('preferred_gender')->nullable();
-            $table->text('fb_token')->nullable();
+            $table->text('fb_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

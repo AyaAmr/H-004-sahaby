@@ -8,7 +8,7 @@ class AuthService
 {
     public function __construct()
     {
-        $this->key = config('key');
+        $this->key = config('app.key');
     }
 
     public function generateToken($authenticatable)

@@ -25,6 +25,7 @@ class CreateRequestsTable extends Migration
                   ->references('id')
                   ->on('volunteers')
                   ->onDelete('cascade');
+            $table->integer('type_need_id')->unsigned()->nullable()->default(null);
             $table->foreign('type_need_id')
                   ->references('id')
                   ->on('type_needs')
