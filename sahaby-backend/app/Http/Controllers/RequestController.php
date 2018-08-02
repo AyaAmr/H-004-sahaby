@@ -8,6 +8,8 @@ use App\Helpers\API\Client as ApiClient;
 use App\Request as RequestModel;
 use Illuminate\Http\Request;
 use App\Services\AuthService;
+use App\User;
+use App\Volunteer;
 
 class RequestController extends Controller
 {
@@ -35,6 +37,15 @@ class RequestController extends Controller
             return ApiClient::respondError(401, "you already have another request not setteled");
         }
         $requestModel = RequestModel::create($request->only('step_id', 'text_notes', 'preferred_gender', 'user_id', 'request_status'));
+
+        $user = User::where('id', $request['user_id'])->first();
+        $userNeed = $user->type_need_id;
+        $volunteers = Volunteer::whereHas('typeNeeds', function ($query) use ($userNeed) {
+            $query->where('type_need_id', $userNeed);
+        })->where('language_id', $user->language_id)->get();
+        foreach ($volunteers as $volunteer) {
+            $volunteer->requests()->attach($requestModel);
+        }
         return ApiClient::respondSuccess("request created successfully", compact('requestModel'));
     }
 

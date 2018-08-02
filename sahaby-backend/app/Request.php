@@ -14,4 +14,9 @@ class Request extends Model
      */
     protected $fillable = ['user_id', 'volunteer_id', 'step_id', 'preferred_gender', 'text_notes', 'voice_notes', 'request_status'];
 
+    public function volunteer()
+    {
+        return $this->belongsTo(Volunteer::class);
+    }
+
 }

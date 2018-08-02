@@ -33,4 +33,9 @@ class Volunteer extends Authenticatable
     {
         return $this->belongsToMany(TypeNeed::class);
     }
+
+    public function requests()
+    {
+        return $this->belongsToMany(Request::class);
+    }
 }
