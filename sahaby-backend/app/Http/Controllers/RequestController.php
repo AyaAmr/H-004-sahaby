@@ -23,6 +23,20 @@ class RequestController extends Controller
 
     public function index()
     {
-        //
+        dd('list all requests');
+    }
+
+    public function store(Request $request)
+    {
+        $request['user_id'] = $request['authenticatable_id'];
+        $request['request_status'] = 1; //1 pending //2 on way //3 done //4 cancel
+        $requestAlreadyExists = RequestModel::where([ ['user_id', '=', $request['user_id']]])->whereIn('request_status', [1,2])->first();
+        if($requestAlreadyExists) {
+            return ApiClient::respondError(401, "you already have another request not setteled");
+        }
+        $requestModel = RequestModel::create($request->only('step_id', 'text_notes', 'preferred_gender', 'user_id', 'request_status'));
+
+        return ApiClient::respondSuccess("request created successfully", compact('requestModel'));
+
     }
 }

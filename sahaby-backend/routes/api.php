@@ -27,4 +27,4 @@ Route::get('languages', 'LanguageController@index');
 Route::get('countries', 'CountryController@index');
 Route::get('type_needs', 'TypeNeedController@index');
 Route::get('steps', 'StepController@index');
-Route::resource('requests', 'RequestController');
+Route::resource('requests', 'RequestController')->middleware(JwtAuth::class);

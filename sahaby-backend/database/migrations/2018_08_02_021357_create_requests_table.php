@@ -30,6 +30,7 @@ class CreateRequestsTable extends Migration
                   ->references('id')
                   ->on('type_needs')
                   ->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
