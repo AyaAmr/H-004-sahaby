@@ -7,13 +7,13 @@ import { FONT_WEIGHT } from '../components';
 
 
 
-class LoginSecond extends Component {
+class LoginThird extends Component {
   
   constructor(props) {
     super(props);
     this.state = {
-      phone: '',
-      error: '',
+      country: '',
+      language: '',
     }
   }
 
@@ -26,14 +26,8 @@ class LoginSecond extends Component {
 
     return (
       <View style={styles.container}>
-        <Image
-          style={{ width: 69, height: 85}}
-          source={require('../assets/images/logo.png')}
-        />
-        <View style={{ marginTop: 10 }}>
-          <Text style={{ color: '#985830', fontSize: 22, fontFamily: 'lateef' }} >في الحج، اطلب العون من صحابي</Text>
-        </View>
-        <View style={{ marginTop: 56 }}>
+
+        <View style={{ marginTop: 37 }}>
           <Text style={{ color: '#9B9B9B', fontSize: 14, fontFamily: 'arimo' }} >Phone number</Text>
           <TextInput
             style={{
@@ -95,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { LoginSecond };
+export { LoginThird };

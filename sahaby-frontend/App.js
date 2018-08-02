@@ -5,7 +5,7 @@ import { StatusBar } from 'react-native';
 import { StyleSheet, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator } from 'react-native';
 import { Container, Button, Text } from 'native-base';
 import { createStackNavigator } from 'react-navigation';
-import { Login, LoginSecond } from './screens';
+import { Login, LoginSecond, LoginThird } from './screens';
 
 
 const MainNav = createStackNavigator({
@@ -21,7 +21,14 @@ const MainNav = createStackNavigator({
       header: null,
     }),
   },
-}, { initialRouteName: 'Login' });
+  LoginThird: {
+    screen: LoginThird,
+    title: 'Tell us More About you',
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+}, { initialRouteName: 'LoginThird' });
 
 
 export default class App extends Component {
@@ -36,6 +43,7 @@ export default class App extends Component {
     await Font.loadAsync({
       'lateef': require('./assets/fonts/Lateef.ttf'),
       'arimo': require('./assets/fonts/Arimo.ttf'),
+      'arimo-italic': require('./assets/fonts/Arimo-Italic.ttf'),
     });
     this.setState({ fontLoaded: true });
   
