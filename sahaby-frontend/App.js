@@ -5,7 +5,7 @@ import { StatusBar } from 'react-native';
 import { StyleSheet, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator } from 'react-native';
 import { Container, Button, Text } from 'native-base';
 import { createStackNavigator } from 'react-navigation';
-import { Login, LoginSecond } from './screens';
+import { Login, LoginSecond, Home } from './screens';
 
 
 const MainNav = createStackNavigator({
@@ -21,7 +21,13 @@ const MainNav = createStackNavigator({
       header: null,
     }),
   },
-}, { initialRouteName: 'Login' });
+  Home: {
+    screen: Home,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+}, { initialRouteName: 'Home' });
 
 
 export default class App extends Component {
@@ -31,16 +37,16 @@ export default class App extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   async componentDidMount() {
     await Font.loadAsync({
       'lateef': require('./assets/fonts/Lateef.ttf'),
       'arimo': require('./assets/fonts/Arimo.ttf'),
     });
     this.setState({ fontLoaded: true });
-  
+
   }
- 
+
   render() {
     if(this.state.fontLoaded) {
       return(<MainNav/>);
@@ -48,7 +54,7 @@ export default class App extends Component {
     } else {
       return <View></View>
     }
-    
+
   }
 }
 
