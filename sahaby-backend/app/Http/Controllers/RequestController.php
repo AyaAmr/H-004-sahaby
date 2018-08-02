@@ -35,8 +35,18 @@ class RequestController extends Controller
             return ApiClient::respondError(401, "you already have another request not setteled");
         }
         $requestModel = RequestModel::create($request->only('step_id', 'text_notes', 'preferred_gender', 'user_id', 'request_status'));
-
         return ApiClient::respondSuccess("request created successfully", compact('requestModel'));
+    }
+
+    public function cancelRequest(Request $request, RequestModel $requestModel)
+    {
+        $authUserId = $request['authenticatable_id'];
+        if($requestModel->user_id == $authUserId) {
+            $requestModel->request_status = 4;
+            $requestModel->save();
+            return ApiClient::respondSuccess("request cancelled successfully", compact('requestModel'));
+        }
+        return ApiClient::respondError(401, "you cannot cancel this request");
 
     }
 }

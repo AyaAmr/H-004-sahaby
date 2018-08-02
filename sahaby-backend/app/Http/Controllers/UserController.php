@@ -8,6 +8,7 @@ use App\Helpers\API\Client as ApiClient;
 use App\User;
 use Illuminate\Http\Request;
 use App\Services\AuthService;
+use App\Request as RequestModel;
 
 class UserController extends Controller
 {
@@ -38,5 +39,21 @@ class UserController extends Controller
             return ApiClient::respondSuccess("User profile created successfully", compact('user'));
         }
         return ApiClient::respondError(404, "User not found", '');
+    }
+
+    public function getCurrentActiveRequest(Request $request)
+    {
+        $user = User::where('id', $request['authenticatable_id'])->first();
+        if($user) {
+
+            $activeRequest = RequestModel::where([ ['user_id', '=', $request['authenticatable_id']]])->whereIn('request_status', [1,2])->first();
+
+            if($activeRequest) {
+                return ApiClient::respondSuccess("Current active request", compact('activeRequest'));
+            }
+            return ApiClient::respondSuccess("No active request", compact('activeRequest'));
+        }
+        return ApiClient::respondError(404, "User not found", '');
+
     }
 }
