@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import Expo, { Facebook, Notifications } from 'expo';
 import axios from 'axios';
 import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator, Image, TextInput } from 'react-native';
-import { FONT_WEIGHT } from '../components';
+import { FONT_WEIGHT, HeaderLogin } from '../components';
 // import registerForNotifications from '../services/push_notifications';
 
 
 
-class LoginSecond extends Component {
+class LoginSecond extends HeaderLogin {
   
   constructor(props) {
     super(props);
@@ -26,6 +26,12 @@ class LoginSecond extends Component {
 
     return (
       <View style={styles.container}>
+        <View style={{ position: 'absolute', bottom: 0, right: 0}}>
+          <Image
+            style={{ width: 300, height: 300 }}
+            source={require('../assets/images/bg.png')}
+          />
+        </View>
         <Image
           style={{ width: 69, height: 85}}
           source={require('../assets/images/logo.png')}
@@ -80,7 +86,7 @@ class LoginSecond extends Component {
             {/* this.loginWithFacebook(); */}
           }
         }}>
-          <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold', fontFamily: 'arimo-bold'}}>GET STARTED</Text>
+          <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold', fontFamily: 'arimo-bold', marginTop: 5}}>GET STARTED</Text>
         </TouchableOpacity>
         
       </View>

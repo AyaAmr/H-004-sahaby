@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import Expo, { Facebook, Notifications } from 'expo';
 import axios from 'axios';
 import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator, Image, TextInput } from 'react-native';
-import { FONT_WEIGHT, NativePicker } from '../components';
+import { FONT_WEIGHT, NativePicker, HeaderLogin } from '../components';
 // import registerForNotifications from '../services/push_notifications';
 
 
 
-class LoginFourth extends Component {
+class LoginFourth extends HeaderLogin {
   
   constructor(props) {
     super(props);
@@ -31,6 +31,12 @@ class LoginFourth extends Component {
 
     return (
       <View style={styles.container}>
+        <View style={{ position: 'absolute', bottom: 0, right: 0}}>
+          <Image
+            style={{ width: 300, height: 300 }}
+            source={require('../assets/images/bg.png')}
+          />
+        </View>
         <Text style={{ color: '#9B9B9B', fontSize: 14, fontFamily: 'arimo', marginVertical: 35, marginLeft: 15 }} >I need Assistance with</Text>
         <View style={{ alignItems: 'center'}}>
           <View style={{ flexDirection: 'row', marginBottom: 27}}>

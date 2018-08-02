@@ -8,6 +8,35 @@ import { createStackNavigator } from 'react-navigation';
 import { Login, LoginSecond, LoginThird, LoginFourth } from './screens';
 
 
+const LoginNav = createStackNavigator({
+  Login: {
+    screen: Login,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+  LoginSecond: {
+    screen: LoginSecond,
+    navigationOptions: () => ({
+      title: 'Tell us More About you',
+    }),
+  },
+  LoginThird: {
+    screen: LoginThird,
+    
+    navigationOptions: () => ({
+      title: 'What do you need?',
+    }),
+  },
+  LoginFourth: {
+    screen: LoginFourth,
+    navigationOptions: () => ({
+      title: 'Your info',
+    }),
+   
+  },
+}, { initialRouteName: 'LoginSecond' });
+
 const MainNav = createStackNavigator({
   Login: {
     screen: Login,
@@ -18,23 +47,26 @@ const MainNav = createStackNavigator({
   LoginSecond: {
     screen: LoginSecond,
     navigationOptions: () => ({
-      header: null,
+      title: 'Tell us More About you',
+
+
     }),
   },
   LoginThird: {
     screen: LoginThird,
-    title: 'Tell us More About you',
+    
     navigationOptions: () => ({
-      header: null,
+      title: 'What do you need?',
     }),
   },
   LoginFourth: {
     screen: LoginFourth,
-    title: 'What do You need',
+    navigationOptions: () => ({
+      title: 'Your info',
+    }),
    
   },
-}, { initialRouteName: 'LoginFourth' });
-
+}, { initialRouteName: 'LoginSecond' });
 
 export default class App extends Component {
   state = {
