@@ -14,4 +14,8 @@ class TypeNeed extends Model
      */
     protected $fillable = [];
 
+    public function volunteers()
+    {
+        return $this->belongsToMany(Volunteer::class);
+    }
 }

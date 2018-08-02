@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Helpers\API\Client as ApiClient;
 use App\User;
+use App\Volunteer;
 use Illuminate\Http\Request;
 use App\Services\AuthService;
 
@@ -28,6 +29,14 @@ class AuthController extends Controller
         $access_token = $this->authService->generateToken($user);
 
         return ApiClient::respondSuccess("Auth success", compact('access_token', 'user'));
+    }
+
+    public function volunteerSignUp(Request $request)
+    {
+        $volunteer = Volunteer::create(['phone_number' => $request['phone_number']]);
+        $access_token = $this->authService->generateToken($volunteer);
+
+        return ApiClient::respondSuccess("Auth success", compact('access_token', 'volunteer'));
     }
 
     public function userLogin()

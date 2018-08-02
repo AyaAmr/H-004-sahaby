@@ -4,9 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Volunteer extends Authenticatable implements JWTSubject
+class Volunteer extends Authenticatable
 {
     use Notifiable;
 
@@ -16,7 +15,7 @@ class Volunteer extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'phone_number', 'verfication_code',
+        'phone_number', 'password', 'name', 'gender', 'fb_id', 'language_id', 'country_id', 'image_name'
     ];
 
     /**
@@ -29,22 +28,9 @@ class Volunteer extends Authenticatable implements JWTSubject
     ];
 
     /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
      */
-    public function getJWTIdentifier()
+    public function typeNeeds()
     {
-        return $this->getKey();
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
+        return $this->belongsToMany(TypeNeed::class);
     }
 }
