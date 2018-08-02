@@ -24,3 +24,7 @@ Route::post('auth/user/login', 'AuthController@userLogin');
 Route::post('auth/volunteer/login', 'AuthController@volunteerLogin');
 Route::post('users/create_profile', 'UserController@createProfile')->middleware(JwtAuth::class);
 Route::get('languages', 'LanguageController@index');
+Route::get('countries', 'CountryController@index');
+Route::get('type_needs', 'TypeNeedController@index');
+Route::get('steps', 'StepController@index');
+Route::resource('requests', 'RequestController');
