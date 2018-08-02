@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { View, Platform, Picker, TouchableOpacity, Image } from 'react-native';
+import { View, Platform, Picker, TouchableOpacity, Image, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import SimplePicker from './SimplePicker';
 
@@ -28,7 +28,12 @@ class NativePicker extends Component {
       return (
         <TouchableOpacity
           onPress={this.showPicker}
-          style={{ justifyContent: 'center' }}>
+          style={{
+            justifyContent: 'center',
+            borderWidth: 1,
+            borderColor: '#F1F1F1',
+            padding: 10,
+            borderRadius: 8 }}>
           <View
             style={[{ flexDirection: 'row', alignItems: 'center' }, pickerStyle]}
           >
@@ -46,7 +51,7 @@ class NativePicker extends Component {
               onSubmit={ (option) => { this.setSelectedValue(option); } }
             />
             <Image
-              style={{ width: 20, height: 20, marginHorizontal: 10 }}
+              style={{ width: 8, height: 6, marginHorizontal: 10 }}
               source = {require('../assets/images/down.png')}/>
           </View>
         </TouchableOpacity>
