@@ -3,9 +3,6 @@ import Expo, { Facebook, Notifications } from 'expo';
 import axios from 'axios';
 import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator, Image } from 'react-native';
 import { FONT_WEIGHT } from '../components';
-// import registerForNotifications from '../services/push_notifications';
-
-
 
 class Home extends Component {
 
@@ -17,7 +14,7 @@ class Home extends Component {
   componentDidMount() {
   }
 
-  createRequets = async () => {
+  createRequest = async () => {
       return 'Hiii';
   }
 

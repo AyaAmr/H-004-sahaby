@@ -5,7 +5,7 @@ import { StatusBar } from 'react-native';
 import { StyleSheet, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator } from 'react-native';
 import { Container, Button, Text } from 'native-base';
 import { createStackNavigator } from 'react-navigation';
-import { Login, LoginSecond, Home } from './screens';
+import { Login, LoginSecond, Home, PersonalInfo } from './screens';
 
 
 const MainNav = createStackNavigator({
@@ -27,7 +27,13 @@ const MainNav = createStackNavigator({
       header: null,
     }),
   },
-}, { initialRouteName: 'Home' });
+  PersonalInfo: {
+    screen: PersonalInfo,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+}, { initialRouteName: 'PersonalInfo' });
 
 
 export default class App extends Component {
