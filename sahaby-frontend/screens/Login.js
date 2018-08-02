@@ -3,6 +3,7 @@ import Expo, { Facebook, Notifications } from 'expo';
 import axios from 'axios';
 import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator, Image } from 'react-native';
 import { FONT_WEIGHT } from '../components';
+import { navigation } from 'react-navigation';
 // import registerForNotifications from '../services/push_notifications';
 
 
@@ -68,7 +69,7 @@ class Login extends Component {
           <Text style={{ color: '#985830', fontSize: 22, fontFamily: 'lateef' }} >في الحج، اطلب العون من صحابي</Text>
         </View>
         <TouchableOpacity style={{
-          width: 180,
+          width: 220,
           paddingVertical: 10,
           backgroundColor: '#4267b2',
           borderRadius: 5,
@@ -85,15 +86,15 @@ class Login extends Component {
           width: 220,
           paddingVertical: 10,
           backgroundColor: '#985830',
-          borderRadius: 2,
+          borderRadius: 5,
           borderWidth: 1,
           borderColor: '#985830',
-          marginTop: 70,
+          marginTop: 20,
         }}
         onPress={ () => {
-          this.loginWithFacebook();
+          this.props.navigation.navigate('LoginSecond');
         }}>
-          <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold', fontFamily: 'arimo'}}>CONTINUE</Text>
+          <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold', fontFamily: 'arimo'}}>Login With Phone</Text>
         </TouchableOpacity>
         
       </View>
