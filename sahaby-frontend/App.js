@@ -80,7 +80,7 @@ export default class App extends Component {
 
   render() {
     if(this.state.fontLoaded) {
-      return(<MainNav/>);
+      return(<LoginNav/>);
 
     } else {
       return <View></View>
