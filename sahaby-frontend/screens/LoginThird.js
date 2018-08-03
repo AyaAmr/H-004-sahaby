@@ -12,37 +12,34 @@ class LoginThird extends HeaderLogin {
   constructor(props) {
     super(props);
     this.state = {
-      country: '',
-      language: '',
+      country: 1,
+      language: 1,
       errorCountry: '',
       errorLanguage: '',
     }
   }
 
-  componentDidMount() {
-
-  }
   setSelectedCountry = (country) => {
-    this.setState({ country });
+    this.setState({ country: country.value });
   }
   setSelectedLanguage = (language) => {
-    this.setState({ language });
+    this.setState({ language: language.value });
   }
  
   render() {
     const languages = [
-      { label: 'English', value: 0 },
-      { label: 'Arabic', value: 1 },
-      { label: 'French', value: 2 },
-      { label: 'German', value: 3 },
-      { label: 'Indian', value: 4 },
-      { label: 'Japanese', value: 5 },
+      { label: 'English', value: 1 },
+      { label: 'Arabic', value: 2 },
+      { label: 'French', value: 3 },
+      { label: 'German', value: 4 },
+      { label: 'Indian', value: 5 },
+      { label: 'Japanese', value: 6 },
     ];
     const countries = [
-      { label: 'Saudi Arabia', value: 0 },
-      { label: 'Egypt', value: 1 },
-      { label: 'Bahrain', value: 2 },
-      { label: 'USA', value: 3 },
+      { label: 'Saudi Arabia', value: 1 },
+      { label: 'Egypt', value: 2 },
+      { label: 'Bahrain', value: 3 },
+      { label: 'USA', value: 4 },
     ];
 
     return (
@@ -80,7 +77,7 @@ class LoginThird extends HeaderLogin {
             pickerTextStyle={{ fontSize: 16, color: '#000', fontFamily: 'arimo-italic' }}
             selectedValue={(option) => { this.setSelectedLanguage(option); }}
           />
-          <Text style={{ color: 'red', fontSize: 14, fontFamily: 'arimo' }} >{this.state.errorCountry}</Text>
+          <Text style={{ color: 'red', fontSize: 14, fontFamily: 'arimo' }} >{this.state.errorLanguage}</Text>
         </View>
         <TouchableOpacity style={{
           width: 220,
@@ -100,7 +97,10 @@ class LoginThird extends HeaderLogin {
             this.setState({ errorLang: 'Please select a country' });
           }
           if (this.state.country !== '' && this.state.language !== '') {
-            // Go somewhere
+            this.props.navigation.navigate('LoginFourth', {
+              language_id: this.state.language,
+              country_id: this.state.country,
+            })
           }
         }}>
           <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold', fontFamily: 'arimo-bold', fontSize: 13, marginTop: 5}}>GET STARTED</Text>

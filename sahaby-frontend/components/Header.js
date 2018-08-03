@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Image } from 'react-native';
-import { Container, Header, Title, Button, Left, Right, Body, Icon } from 'native-base';
 
 class Header extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -9,7 +8,7 @@ class Header extends Component {
       }}>
       <Image
         source={require('../assets/images/menu.png')}
-        style={{ width: 25, height: 16 }}/>
+        style={{ width: 25, height: 16, marginLeft: 25, marginTop: 5 }}/>
       </TouchableOpacity>)
     return (
       {
@@ -26,7 +25,8 @@ class Header extends Component {
           borderBottomColor: 'transparent',
         },
         headerTitle: (
-          <Image source={require('./some/mainLogo.png')}/>
+          <Image source={require('../assets/images/mainLogo.png')}
+            style={{ width: 44, height: 29, marginTop: 10}}/>
         ),
         headerTintColor: '#FFFFFF',
         headerLeft: rightButton,

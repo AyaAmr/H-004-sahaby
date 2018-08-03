@@ -5,8 +5,7 @@ import { StatusBar } from 'react-native';
 import { StyleSheet, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator } from 'react-native';
 import { Container, Button, Text } from 'native-base';
 import { createStackNavigator } from 'react-navigation';
-import { Login, LoginSecond, LoginThird, LoginFourth } from './screens';
-
+import { Login, LoginSecond, LoginThird, LoginFourth, Home, PersonalInfo } from './screens';
 
 const LoginNav = createStackNavigator({
   Login: {
@@ -18,55 +17,41 @@ const LoginNav = createStackNavigator({
   LoginSecond: {
     screen: LoginSecond,
     navigationOptions: () => ({
-      title: 'Tell us More About you',
-    }),
-  },
-  LoginThird: {
-    screen: LoginThird,
-    
-    navigationOptions: () => ({
-      title: 'What do you need?',
-    }),
-  },
-  LoginFourth: {
-    screen: LoginFourth,
-    navigationOptions: () => ({
-      title: 'Your info',
-    }),
-   
-  },
-}, { initialRouteName: 'LoginSecond' });
-
-const MainNav = createStackNavigator({
-  Login: {
-    screen: Login,
-    navigationOptions: () => ({
       header: null,
     }),
   },
-  LoginSecond: {
-    screen: LoginSecond,
-    navigationOptions: () => ({
-      title: 'Tell us More About you',
-
-
-    }),
-  },
   LoginThird: {
     screen: LoginThird,
     
     navigationOptions: () => ({
-      title: 'What do you need?',
+      title: 'Tell Us more about you',
     }),
   },
   LoginFourth: {
     screen: LoginFourth,
+    
     navigationOptions: () => ({
-      title: 'Your info',
+      title: 'What do you need?',
     }),
    
   },
-}, { initialRouteName: 'LoginSecond' });
+  Home: {
+    screen: Home,
+  },
+  PersonalInfo: {
+    screen: PersonalInfo,
+    navigationOptions: () => ({
+      title: 'Your info',
+    }),
+  },
+}, { initialRouteName: 'PersonalInfo' });
+
+const MainNav = createStackNavigator({
+
+  Home: {
+    screen: Home,
+  },
+}, { initialRouteName: 'Home' });
 
 export default class App extends Component {
   state = {
@@ -75,7 +60,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   async componentDidMount() {
     await Font.loadAsync({
       'lateef': require('./assets/fonts/Lateef.ttf'),
@@ -84,17 +69,24 @@ export default class App extends Component {
       'arimo-bold': require('./assets/fonts/Arimo-Bold.ttf'),
     });
     this.setState({ fontLoaded: true });
-  
+    // AsyncStorage.multiGet(['token', 'user'], (err, result) => {
+    //   if(result[0].length > 0) {
+    //     this.setState({ user: JSON.parse(result[1][1]), fb: true });
+    //   }
+    //   this.setState({ loading: false });
+
+    // })
+
   }
- 
+
   render() {
     if(this.state.fontLoaded) {
-      return(<MainNav/>);
+      return(<LoginNav/>);
 
     } else {
       return <View></View>
     }
-    
+
   }
 }
 

@@ -17,18 +17,12 @@ class LoginFourth extends HeaderLogin {
   }
 
   componentDidMount() {
+    debugger;
 
   }
-  setSelectedCountry = (country) => {
-    this.setState({ country });
-  }
-  setSelectedLanguage = (language) => {
-    this.setState({ language });
-  }
+
  
   render() {
-    
-
     return (
       <View style={styles.container}>
         <View style={{ position: 'absolute', bottom: 0, right: 0}}>
@@ -128,6 +122,11 @@ class LoginFourth extends HeaderLogin {
           }
           else {
             const number = this.state.selected + 1;
+            const { params } = this.props.navigation.state;
+            debugger;
+            this.props.navigation.navigate('PersonalInfo', params, ...{
+              type_need_id: number,
+            });
           }
         
         }}>

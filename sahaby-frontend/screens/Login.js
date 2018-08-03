@@ -14,7 +14,7 @@ class Login extends Component {
     super(props);
     this.state = {
       fb: false,
-      loading: true,
+      // loading: true,
     }
   }
   loginWithFacebook = async () => {
@@ -28,8 +28,8 @@ class Login extends Component {
     console.log(token);
     return axios({
       method: 'POST',
-      url: 'http://e10aedd3.ngrok.io/api/auth/login_with_fb',
-      data: { fb_token: token},
+      url: 'https://staging.robustastudio.com/H-004-sahaby/sahaby-backend/public/api/auth/login_with_fb',
+      data: { fb_token: token },
       headers: {
         'Content-Type': 'application/json',
       },
@@ -95,7 +95,7 @@ class Login extends Component {
         onPress={ () => {
           this.props.navigation.navigate('LoginSecond');
         }}>
-          <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold', fontFamily: 'arimo'}}>Login With Phone</Text>
+          <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold', fontFamily: 'arimo-bold'}}>Login With Phone</Text>
         </TouchableOpacity>
         
       </View>
