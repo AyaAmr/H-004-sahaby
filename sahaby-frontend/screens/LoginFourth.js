@@ -15,12 +15,6 @@ class LoginFourth extends HeaderLogin {
       selected: -1,
     }
   }
-
-  componentDidMount() {
-    debugger;
-
-  }
-
  
   render() {
     return (
@@ -123,9 +117,8 @@ class LoginFourth extends HeaderLogin {
           else {
             const number = this.state.selected + 1;
             const { params } = this.props.navigation.state;
-            debugger;
-            this.props.navigation.navigate('PersonalInfo', params, ...{
-              type_need_id: number,
+            this.props.navigation.navigate('PersonalInfo', {...params, ...{
+              type_need_id: number}
             });
           }
         

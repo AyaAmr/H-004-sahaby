@@ -43,7 +43,7 @@ class Home extends Header {
           />
           <Text style={{ color: 'white' }}> Ask for sahaby </Text>
           onPress={ () => {
-            this.createRequest();
+            this.props.navigation.navigate('')
           }}>
           </TouchableOpacity>
         </View>

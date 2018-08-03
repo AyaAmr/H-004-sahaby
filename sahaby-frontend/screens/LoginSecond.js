@@ -93,7 +93,6 @@ class LoginSecond extends Component {
               },
             }).then((response) => {
               const { data } = response.data;
-              debugger;
               AsyncStorage.multiSet([['token', data.access_token], ['user', JSON.stringify(data.user)]]).then(() => {
                 console.log(data);
                 this.setState({ loading: false });
@@ -101,7 +100,6 @@ class LoginSecond extends Component {
                 
               });
             }).catch((error) => {
-              debugger;
               this.setState({ loading: false });
               return error.response;
             });

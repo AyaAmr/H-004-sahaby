@@ -22,18 +22,15 @@ const LoginNav = createStackNavigator({
   },
   LoginThird: {
     screen: LoginThird,
-    
     navigationOptions: () => ({
       title: 'Tell Us more about you',
     }),
   },
   LoginFourth: {
     screen: LoginFourth,
-    
     navigationOptions: () => ({
       title: 'What do you need?',
     }),
-   
   },
   Home: {
     screen: Home,
@@ -44,7 +41,7 @@ const LoginNav = createStackNavigator({
       title: 'Your info',
     }),
   },
-}, { initialRouteName: 'PersonalInfo' });
+}, { initialRouteName: 'LoginSecond' });
 
 const MainNav = createStackNavigator({
 
@@ -56,6 +53,7 @@ const MainNav = createStackNavigator({
 export default class App extends Component {
   state = {
     fontLoaded: false,
+    loggedn: false,
   };
   constructor(props) {
     super(props);
@@ -69,14 +67,6 @@ export default class App extends Component {
       'arimo-bold': require('./assets/fonts/Arimo-Bold.ttf'),
     });
     this.setState({ fontLoaded: true });
-    // AsyncStorage.multiGet(['token', 'user'], (err, result) => {
-    //   if(result[0].length > 0) {
-    //     this.setState({ user: JSON.parse(result[1][1]), fb: true });
-    //   }
-    //   this.setState({ loading: false });
-
-    // })
-
   }
 
   render() {

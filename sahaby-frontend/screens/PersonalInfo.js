@@ -15,22 +15,48 @@ class PersonalInfo extends HeaderLogin {
       gender_error: '',
       photo: null,
       photo_error: '',
+      loading: false,
     }
   }
   componentDidMount() {
   }
 
-  submit = () => {
-    const source = { uri: photo.path, type: photo.type };
-    const formData = new FormData();
-    Object.keys(source).forEach(key => formData.append(key, source[key]));
-    debugger;
-    const { params } = this.props.navigation.state;
-    const body = { params, ... {
-      image: source,
-      name: this.state.name,
-    }};
-    
+  submit = async () => {
+    if (this.state.name === '') {
+      this.setState({ name_error: 'Please insert name' });
+    }
+    if (this.state.photo === null) {
+      this.setState({ photo_error: 'Please insert photo' });
+    }
+    if(this.state.name !== '' && this.state.photo !== null) {
+      this.setState({ loading: true });
+      const source = { uri: this.state.photo.uri, type: this.state.photo.type };
+      const formData = new FormData();
+      Object.keys(source).forEach(key => formData.append(key, source[key]));
+      const { params } = this.props.navigation.state;
+      const body = { ...params, ... {
+        image: formData,
+        name: this.state.name,
+      }};
+      const token = await AsyncStorage.getItem('token');
+      return axios({
+        method: 'POST',
+        url: 'https://staging.robustastudio.com/H-004-sahaby/sahaby-backend/public/api/users/create_profile',
+        data: body,
+        headers: {
+          Authorization: token,
+        },
+      }).then((response) => {
+        const { data } = response.data;
+        AsyncStorage.setItem('user', JSON.stringify(data.user)).then(() => {
+          this.setState({ loading: false });
+          this.props.navigation.navigate('Home');
+        });
+      }).catch((error) => {
+        this.setState({ loading: false });
+        return error.response;
+      });
+    }
   }
 
   pickImage = async () => {
@@ -41,9 +67,7 @@ class PersonalInfo extends HeaderLogin {
         allowsEditing: true,
         aspect: [3, 2],
       });
-
       console.log(result);
-
       if (!result.cancelled) {
         this.setState({ photo: result });
       }
@@ -99,7 +123,7 @@ class PersonalInfo extends HeaderLogin {
           <View style={{ alignItems: 'center'}}>
             <TouchableOpacity
               onPress={() => this.pickImage()}
-              style={{ width: 300, height: 200, alignItems: 'center', justifyContent: 'center', borderStyle: 'dashed', borderWidth: 1 }}>
+              style={{ width: 300, height: 200, alignItems: 'center', justifyContent: 'center', borderStyle: 'dashed', borderColor: '#9B9B9B',  borderWidth: 1 }}>
               {photo === null &&
                 <View style={{alignItems: 'center'}}>
                   <Image
@@ -114,10 +138,15 @@ class PersonalInfo extends HeaderLogin {
                   source={{ uri: photo.uri }}
                   style={{ width: 300, height: 200 }} />}
             </TouchableOpacity>
+            <Text style={{ color: 'red', fontSize: 14, fontFamily: 'arimo' }} >{this.state.photo_error}</Text>
+
           </View>
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
           <TouchableOpacity
+            onPress={ () => {
+              this.submit();
+            }}
             style={{
               height: 50,
               width: 288,
@@ -127,10 +156,12 @@ class PersonalInfo extends HeaderLogin {
               borderRadius:10,
             }}
           >
-          <Text style={{ color: 'white', fontFamily: 'arimo-bold', }}> START USING SAHABY </Text>
-          onPress={ () => {
-            this.submit();
-          }}>
+            {!this.state.loading &&
+              <Text style={{ color: 'white', fontFamily: 'arimo-bold', }}> START USING SAHABY </Text>
+            }
+            {this.state.loading &&
+              <ActivityIndicator/>
+            }
           </TouchableOpacity>
         </View>
       </View>
