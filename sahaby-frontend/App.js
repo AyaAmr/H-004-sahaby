@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Expo, { Facebook, Notifications, Font } from 'expo';
 import axios from 'axios';
 import { StatusBar } from 'react-native';
-import { StyleSheet, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Alert, ActivityIndicator, AsyncStorage } from 'react-native';
 import { Container, Button, Text } from 'native-base';
 import { createStackNavigator } from 'react-navigation';
-import { Login, LoginSecond, LoginThird, LoginFourth, Home, PersonalInfo, Request, VolunteerInfo, RequestWrapper } from './screens';
+import { Login, LoginSecond, LoginThird, LoginThirdV, LoginFourth, Home, PersonalInfo, Request, VolunteerInfo, RequestWrapper, LoginFourthV, HomeVolunteer } from './screens';
 
 const LoginNav = createStackNavigator({
   Login: {
@@ -23,7 +23,13 @@ const LoginNav = createStackNavigator({
   LoginThird: {
     screen: LoginThird,
     navigationOptions: () => ({
-      title: 'Tell Us more about you',
+      title: 'Tell us more about you',
+    }),
+  },
+  LoginThirdV: {
+    screen: LoginThirdV,
+    navigationOptions: () => ({
+      title: 'Tell me more about you',
     }),
   },
   LoginFourth: {
@@ -32,8 +38,20 @@ const LoginNav = createStackNavigator({
       title: 'What do you need?',
     }),
   },
+  LoginFourthV: {
+    screen: LoginFourthV,
+    navigationOptions: () => ({
+      title: 'What can you offer?',
+    }),
+  },
   Home: {
     screen: Home,
+  },
+  VolunteerInfo: {
+    screen: VolunteerInfo,
+    navigationOptions: () => ({
+      title: 'Your info',
+    }),
   },
   PersonalInfo: {
     screen: PersonalInfo,
@@ -44,7 +62,6 @@ const LoginNav = createStackNavigator({
 }, { initialRouteName: 'Login' });
 
 const MainNav = createStackNavigator({
-
   Home: {
     screen: Home,
   },
@@ -52,12 +69,13 @@ const MainNav = createStackNavigator({
     screen: RequestWrapper,
   },
   VolunteerInfo: {
-    screen: Request,
-    navigationOptions: () => ({
-      header: null,
-    }),
+    screen: VolunteerInfo,
+   
   },
-}, { initialRouteName: 'Home' });
+  HomeVolunteer: {
+    screen: HomeVolunteer,
+  },
+}, { initialRouteName: 'VolunteerInfo' });
 
 export default class App extends Component {
   state = {
@@ -69,6 +87,7 @@ export default class App extends Component {
   }
 
   async componentDidMount() {
+ 
     await Font.loadAsync({
       'lateef': require('./assets/fonts/Lateef.ttf'),
       'arimo': require('./assets/fonts/Arimo.ttf'),
@@ -76,11 +95,44 @@ export default class App extends Component {
       'arimo-bold': require('./assets/fonts/Arimo-Bold.ttf'),
     });
     this.setState({ fontLoaded: true });
+    AsyncStorage.multiGet(['token', 'volunteer'], (err, result) => {
+      if(result[0].length > 0) {
+        this.setState({ loggedIn: true });
+      }
+      if(result[1].length > 0) {
+        this.setState({ volunteer: true });
+      }
+      this.setState({ loading: false });
+
+    })
+    if(token !== null) {
+      this.setState({ loggedIn : true});
+    }
   }
 
   render() {
+    const MainNav = createStackNavigator({
+      Home: {
+        screen: Home,
+      },
+      RequestWrapper: {
+        screen: RequestWrapper,
+      },
+      VolunteerInfo: {
+        screen: VolunteerInfo,
+       
+      },
+      HomeVolunteer: {
+        screen: HomeVolunteer,
+      },
+    }, { initialRouteName: this.state.volunteer ? 'VolunteerInfo' : 'Home' });
+    
     if(this.state.fontLoaded) {
-      return(<MainNav/>);
+      if(this.state.loggedIn) {
+        return(<LoginNav/>);
+      } else {
+        return(<MainNav/>);
+      }
 
     } else {
       return <View></View>

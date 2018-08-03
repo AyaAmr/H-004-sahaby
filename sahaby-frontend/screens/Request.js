@@ -29,7 +29,6 @@ class Request extends Header {
         'preferred_gender': this.state.gender,
         step_id: this.state.step,
       }
-    debugger;
     const token = await AsyncStorage.getItem('token');
     return axios({
       method: 'POST',
@@ -152,7 +151,6 @@ class Request extends Header {
           alignItems: 'center'
         }}
         onPress={ () => {
-          debugger;
           this.submit();
           }
         }>

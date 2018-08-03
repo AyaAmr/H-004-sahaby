@@ -25,7 +25,10 @@ class LoginSecond extends Component {
   goToNext = () => {
     this.props.navigation.navigate('LoginThird', { phone: this.state.phone });
   }
-  
+  goToNextV = () => {
+    debugger;
+    this.props.navigation.navigate('LoginThirdV', { phone: this.state.phone });
+  }
  
   render() {
 
@@ -116,9 +119,7 @@ class LoginSecond extends Component {
         <TouchableOpacity
           disabled={this.state.loading}
           onPress = {() => {
-            AsyncStorage.setItem('volunteer', "1").then(() => {
-              this.goToNext();
-            });
+            this.goToNextV();
           }}
           style={{position: 'absolute', bottom: 40, borderTopWidth: 1, left: 10, right: 10, alignItems: 'center', borderTopColor: '#F5F5F5' }}>
           <Text style={{ paddingTop: 30, color: '#9B9B9B', textDecorationLine: 'underline' }}>Volunteer Register</Text>
