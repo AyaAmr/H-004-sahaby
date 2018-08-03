@@ -57,7 +57,7 @@ const MainNav = createStackNavigator({
       header: null,
     }),
   },
-}, { initialRouteName: 'VolunteerInfo' });
+}, { initialRouteName: 'Home' });
 
 export default class App extends Component {
   state = {

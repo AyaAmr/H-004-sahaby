@@ -16,7 +16,7 @@ class LoadingRequest extends Header {
     }
   }
   render() {
-    <View>
+    return(<View>
       <Image 
         style={{width: '100%', height: '100%'}} 
         source={require('../assets/images/request_background.png')}  
@@ -35,7 +35,7 @@ class LoadingRequest extends Header {
           <Text style={{ textDecorationLine: 'underline', color: '#4a4a4a', fontFamily: 'arimo', fontSize: 13}}> cancel request </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </View>);
   }
 }
 export { LoadingRequest }

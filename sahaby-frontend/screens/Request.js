@@ -29,6 +29,7 @@ class Request extends Header {
         'preferred_gender': this.state.gender,
         step_id: this.state.step,
       }
+    debugger;
     const token = await AsyncStorage.getItem('token');
     return axios({
       method: 'POST',
@@ -39,9 +40,9 @@ class Request extends Header {
       },
     }).then((response) => {
       AsyncStorage.setItem('request', "true");
-      this.setState({ submit: true });
+      this.props.isSubmitted(true);
     }).catch((error) => {
-      debugger;
+      this.props.isSubmitted(true);
       this.setState({ loading: false, error: 'You have already requested another trip' });
       return error.response;
     });
@@ -123,6 +124,7 @@ class Request extends Header {
         </View>
         <Text style={{ color: '#9B9B9B', fontSize: 14, fontFamily: 'arimo', marginTop: 10 }}> Comments </Text>
         <TextInput
+          multiline={true}
           style={{
             height: 190,
             textAlignVertical: 'top',
@@ -150,6 +152,7 @@ class Request extends Header {
           alignItems: 'center'
         }}
         onPress={ () => {
+          debugger;
           this.submit();
           }
         }>
