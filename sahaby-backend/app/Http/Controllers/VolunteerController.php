@@ -41,4 +41,11 @@ class VolunteerController extends Controller
         }
         return ApiClient::respondError(404, "Volunteer not found", '');
     }
+
+    public function getRequests(Request $request, Volunteer $volunteer)
+    {
+        $volunteerRequests = $volunteer->requests()->with('user')->get();
+        return ApiClient::respondSuccess("Volunteer requests", compact('volunteerRequests'));
+
+    }
 }

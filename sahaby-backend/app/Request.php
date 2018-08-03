@@ -19,4 +19,13 @@ class Request extends Model
         return $this->belongsTo(Volunteer::class);
     }
 
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function volunteers()
+    {
+        return $this->belongsToMany(Volunteer::class);
+    }
 }

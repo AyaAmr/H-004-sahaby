@@ -60,4 +60,16 @@ class RequestController extends Controller
         return ApiClient::respondError(401, "you cannot cancel this request");
 
     }
+
+    public function acceptRequest(Request $request, RequestModel $requestModel)
+    {
+        $authUserId = $request['authenticatable_id'];
+        $requestModel->volunteer_id = $authUserId;
+        $requestModel->request_status = 2;
+        $requestModel->save();
+        $requestModel->volunteers()->where('volunteer_id', '!=', $authUserId)->where('request_id', $requestModel->id)->delete();
+        return ApiClient::respondSuccess("request accepted successfully", compact('requestModel'));
+
+    }
 }
+

@@ -28,6 +28,7 @@ Route::post('auth/volunteer/signup', 'AuthController@volunteerSignUp');
 Route::post('users/create_profile', 'UserController@createProfile')->middleware(JwtAuth::class);
 Route::get('users/get_current_active_request', 'UserController@getCurrentActiveRequest')->middleware(JwtAuth::class);
 Route::post('volunteers/create_profile', 'VolunteerController@createProfile')->middleware(JwtAuth::class);
+Route::get('volunteers/{volunteer}/requests', 'VolunteerController@getRequests')->middleware(JwtAuth::class);
 
 Route::get('languages', 'LanguageController@index');
 Route::get('countries', 'CountryController@index');
@@ -35,4 +36,4 @@ Route::get('type_needs', 'TypeNeedController@index');
 Route::get('steps', 'StepController@index');
 Route::resource('requests', 'RequestController')->middleware(JwtAuth::class);
 Route::patch('requests/{requestModel}/cancel', 'RequestController@cancelRequest')->middleware(JwtAuth::class);
-
+Route::patch('requests/{requestModel}/accept', 'RequestController@acceptRequest')->middleware(JwtAuth::class);
