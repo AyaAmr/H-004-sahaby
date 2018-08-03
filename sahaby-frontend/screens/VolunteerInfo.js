@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
 import { Button, StyleSheet, Text, TextInput, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator, Image, Dimensions, ScrollView } from 'react-native';
+=======
+import { Button, StyleSheet, Text, TextInput, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator, Image, Dimensions } from 'react-native';
+>>>>>>> f2d184448e1600b0d82f03343eb3354b8d432369
 import { FONT_WEIGHT, HeaderLogin } from '../components';
 import { ImagePicker, Permissions, Camera } from 'expo';
 
@@ -55,7 +59,11 @@ class VolunteerInfo extends HeaderLogin {
         const { data } = response.data;
         AsyncStorage.setItem('volunteer', JSON.stringify(data.volunteer)).then(() => {
           this.setState({ loading: false });
+<<<<<<< HEAD
           this.props.navigation.navigate('VolunteerHome');
+=======
+          this.props.navigation.navigate('Home');
+>>>>>>> f2d184448e1600b0d82f03343eb3354b8d432369
         });
       }).catch((error) => {
         this.setState({ loading: false });
@@ -96,7 +104,11 @@ class VolunteerInfo extends HeaderLogin {
       return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}><ActivityIndicator/></View>);
     }
     return (
+<<<<<<< HEAD
       <ScrollView style={styles.container}>
+=======
+      <View style={styles.container}>
+>>>>>>> f2d184448e1600b0d82f03343eb3354b8d432369
         <View>
           <Text style={{ color: '#9B9B9B', fontSize: 14, fontFamily: 'arimo', marginLeft: 15 }} >Full Name</Text>
           <TextInput
@@ -212,7 +224,10 @@ class VolunteerInfo extends HeaderLogin {
               justifyContent:'center',
               backgroundColor:'#985830',
               borderRadius:10,
+<<<<<<< HEAD
               marginBottom: 60,
+=======
+>>>>>>> f2d184448e1600b0d82f03343eb3354b8d432369
             }}
           >
             {!this.state.loading &&
@@ -223,7 +238,11 @@ class VolunteerInfo extends HeaderLogin {
             }
           </TouchableOpacity>
         </View>
+<<<<<<< HEAD
       </ScrollView>
+=======
+      </View>
+>>>>>>> f2d184448e1600b0d82f03343eb3354b8d432369
     );
   }
 }

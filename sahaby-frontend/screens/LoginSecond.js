@@ -26,7 +26,6 @@ class LoginSecond extends Component {
     this.props.navigation.navigate('LoginThird', { phone: this.state.phone });
   }
   goToNextV = () => {
-    debugger;
     this.props.navigation.navigate('LoginThirdV', { phone: this.state.phone });
   }
  
@@ -119,7 +118,12 @@ class LoginSecond extends Component {
         <TouchableOpacity
           disabled={this.state.loading}
           onPress = {() => {
-            this.goToNextV();
+            if(this.state.phone === '') {
+              this.setState({ error: 'Please enter a phone number' });
+            } else {
+              this.goToNextV();
+
+            }
           }}
           style={{position: 'absolute', bottom: 40, borderTopWidth: 1, left: 10, right: 10, alignItems: 'center', borderTopColor: '#F5F5F5' }}>
           <Text style={{ paddingTop: 30, color: '#9B9B9B', textDecorationLine: 'underline' }}>Volunteer Register</Text>
