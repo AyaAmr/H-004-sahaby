@@ -9,9 +9,14 @@ class Home extends Header {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
     }
   }
   componentDidMount() {
+    AsyncStorage.getItem('user').then((result, err) => {
+      this.setState({ user: JSON.parse(result),
+      loading: false });
+    });
   }
 
   createRequest = async () => {
@@ -20,14 +25,17 @@ class Home extends Header {
 
   render() {
     if(this.state.loading) {
-      return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}><ActivityIndicator/></View>);
+      return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff'}}><ActivityIndicator/></View>);
     }
     return (
       <View style={styles.container}>
-        <Text style={{ color: '#4A4A4A', fontSize: 26}}> Welcome, Amal! </Text>
-        <Text style={{ color: '#b5b5b5', fontSize: 16, marginTop: 10, marginBottom: 88}}> 35 sahaby are available right now </Text>
-        <View style={{ alignItems:'center' }}>
+        <Text style={{ color: '#4A4A4A', fontSize: 26}}>{`Welcome, ${this.state.user.name}`}</Text>
+        {/* <Text style={{ color: '#b5b5b5', fontSize: 16, marginTop: 10, marginBottom: 88}}> 35 sahaby are available right now </Text> */}
+        <View style={{ alignItems:'center', marginTop: 98 }}>
           <TouchableOpacity
+          onPress={ () => {
+            this.props.navigation.navigate('Request')
+          }}
             style={{
                 height: 192,
                 width: 188,
@@ -42,9 +50,7 @@ class Home extends Header {
             source={require('../assets/images/logo-white.png')}
           />
           <Text style={{ color: 'white' }}> Ask for sahaby </Text>
-          onPress={ () => {
-            this.props.navigation.navigate('')
-          }}>
+          
           </TouchableOpacity>
         </View>
       </View>

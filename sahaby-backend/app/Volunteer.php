@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Volunteer extends Authenticatable
 {
     use Notifiable;
 
@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'phone_number', 'password', 'fb_id', 'gender', 'language_id', 'preferred_gender', 'type_need_id', 'language_id', 'country_id', 'image_name'
+        'phone_number', 'password', 'name', 'gender', 'fb_id', 'language_id', 'country_id', 'image_name'
     ];
 
     /**
@@ -26,6 +26,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     */
+    public function typeNeeds()
+    {
+        return $this->belongsToMany(TypeNeed::class);
+    }
 
     public function requests()
     {

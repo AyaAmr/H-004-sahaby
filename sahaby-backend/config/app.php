@@ -108,6 +108,10 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'fb_app_id' => env('FB_APP_ID'),
+    'fb_app_secret' => env('FB_APP_SECRET'),
+    
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

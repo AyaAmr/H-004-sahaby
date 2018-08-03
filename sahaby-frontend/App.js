@@ -5,7 +5,7 @@ import { StatusBar } from 'react-native';
 import { StyleSheet, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator } from 'react-native';
 import { Container, Button, Text } from 'native-base';
 import { createStackNavigator } from 'react-navigation';
-import { Login, LoginSecond, LoginThird, LoginFourth, Home, PersonalInfo } from './screens';
+import { Login, LoginSecond, LoginThird, LoginFourth, Home, PersonalInfo, Request } from './screens';
 
 const LoginNav = createStackNavigator({
   Login: {
@@ -41,12 +41,16 @@ const LoginNav = createStackNavigator({
       title: 'Your info',
     }),
   },
-}, { initialRouteName: 'LoginSecond' });
+}, { initialRouteName: 'Login' });
 
 const MainNav = createStackNavigator({
 
   Home: {
     screen: Home,
+  },
+  Request: {
+    screen: Request,
+  
   },
 }, { initialRouteName: 'Home' });
 
@@ -71,7 +75,7 @@ export default class App extends Component {
 
   render() {
     if(this.state.fontLoaded) {
-      return(<LoginNav/>);
+      return(<MainNav/>);
 
     } else {
       return <View></View>
