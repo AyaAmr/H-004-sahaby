@@ -5,3 +5,4 @@ export * from './PersonalInfo';
 export * from './LoginThird';
 export * from './LoginFourth';
 export * from './Request';
+export * from './VolunteerInfo';

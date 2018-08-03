@@ -5,7 +5,7 @@ import { StatusBar } from 'react-native';
 import { StyleSheet, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator } from 'react-native';
 import { Container, Button, Text } from 'native-base';
 import { createStackNavigator } from 'react-navigation';
-import { Login, LoginSecond, LoginThird, LoginFourth, Home, PersonalInfo, Request } from './screens';
+import { Login, LoginSecond, LoginThird, LoginFourth, Home, PersonalInfo, Request, VolunteerInfo } from './screens';
 
 const MainNav = createStackNavigator({
   Login: {
@@ -47,7 +47,13 @@ const MainNav = createStackNavigator({
       header: null,
     }),
   },
-}, { initialRouteName: 'Request' });
+  VolunteerInfo: {
+    screen: Request,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+}, { initialRouteName: 'VolunteerInfo' });
 
 export default class App extends Component {
   state = {
