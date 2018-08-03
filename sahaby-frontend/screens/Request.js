@@ -21,7 +21,6 @@ class Request extends Header {
   }
 
   submit = async () => {
-
     if (this.state.gender === '') {
       this.setState({ gender_error: 'Please choose your prefered gender type' });
     } else {
@@ -39,7 +38,7 @@ class Request extends Header {
         Authorization: token,
       },
     }).then((response) => {
-      debugger;
+      AsyncStorage.setItem('request', "true");
       this.setState({ submit: true });
     }).catch((error) => {
       debugger;
@@ -131,16 +130,11 @@ class Request extends Header {
             borderColor: '#F1F1F1',
             paddingHorizontal: 16,
             borderRadius: 8,
-            marginTop: 10,
-            color: '#000',
-            fontFamily: 'arimo-italic',
-            fontSize: 16,
-          }}
-          underlineColorAndroid='rgba(0, 0, 0, 0)'
-          autoCorrect={false}
-          placeholder = '(Optional)'
-          onChangeText={ (text) => {
-            this.setState({ comments: text });
+            borderWidth: 1,
+            borderColor: '#985830',
+            marginTop: 20,
+            height: 48,
+            alignItems: 'center'
           }}
           value={this.state.comments}
         />

@@ -34,7 +34,7 @@ class Home extends Header {
         <View style={{ alignItems:'center', marginTop: 98 }}>
           <TouchableOpacity
           onPress={ () => {
-            this.props.navigation.navigate('Request')
+            this.props.navigation.navigate('RequestWrapper');
           }}
             style={{
                 height: 192,
