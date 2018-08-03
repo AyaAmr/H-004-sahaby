@@ -46,7 +46,7 @@ class UserController extends Controller
         $user = User::where('id', $request['authenticatable_id'])->first();
         if($user) {
 
-            $activeRequest = RequestModel::where([ ['user_id', '=', $request['authenticatable_id']]])->whereIn('request_status', [1,2])->first();
+            $activeRequest = RequestModel::where([ ['user_id', '=', $request['authenticatable_id']]])->whereIn('request_status', [1,2])->with('volunteer')->first();
 
             if($activeRequest) {
                 return ApiClient::respondSuccess("Current active request", compact('activeRequest'));
