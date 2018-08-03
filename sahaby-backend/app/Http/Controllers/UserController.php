@@ -35,7 +35,7 @@ class UserController extends Controller
                 $request['image_name'] = $name;
             }
             $user = $user->update($request->only('language_id', 'country_id', 'type_need_id', 'name', 'gender', 'image_name'));
-
+            $user = User::where('id', $request['authenticatable_id'])->first();
             return ApiClient::respondSuccess("User profile created successfully", compact('user'));
         }
         return ApiClient::respondError(404, "User not found", '');
