@@ -5,9 +5,9 @@ import { StatusBar } from 'react-native';
 import { StyleSheet, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator } from 'react-native';
 import { Container, Button, Text } from 'native-base';
 import { createStackNavigator } from 'react-navigation';
-import { Login, LoginSecond, LoginThird, LoginFourth, Home, PersonalInfo, Request } from './screens';
+import { Login, LoginSecond, LoginThird, LoginFourth, Home, PersonalInfo, Request, VolunteerInfo, RequestWrapper } from './screens';
 
-const MainNav = createStackNavigator({
+const LoginNav = createStackNavigator({
   Login: {
     screen: Login,
     navigationOptions: () => ({
@@ -22,15 +22,15 @@ const MainNav = createStackNavigator({
   },
   LoginThird: {
     screen: LoginThird,
-    title: 'Tell us More About you',
     navigationOptions: () => ({
-      header: null,
+      title: 'Tell Us more about you',
     }),
   },
   LoginFourth: {
     screen: LoginFourth,
-    title: 'What do You need',
-   
+    navigationOptions: () => ({
+      title: 'What do you need?',
+    }),
   },
   Home: {
     screen: Home,
@@ -38,20 +38,31 @@ const MainNav = createStackNavigator({
   PersonalInfo: {
     screen: PersonalInfo,
     navigationOptions: () => ({
-      header: null,
+      title: 'Your info',
     }),
   },
-  Request: {
+}, { initialRouteName: 'Login' });
+
+const MainNav = createStackNavigator({
+
+  Home: {
+    screen: Home,
+  },
+  RequestWrapper: {
+    screen: RequestWrapper,
+  },
+  VolunteerInfo: {
     screen: Request,
     navigationOptions: () => ({
       header: null,
     }),
   },
-}, { initialRouteName: 'Request' });
+}, { initialRouteName: 'Home' });
 
 export default class App extends Component {
   state = {
     fontLoaded: false,
+    loggedn: false,
   };
   constructor(props) {
     super(props);
@@ -65,12 +76,11 @@ export default class App extends Component {
       'arimo-bold': require('./assets/fonts/Arimo-Bold.ttf'),
     });
     this.setState({ fontLoaded: true });
-
   }
 
   render() {
     if(this.state.fontLoaded) {
-      return(<MainNav/>);
+      return(<LoginNav/>);
 
     } else {
       return <View></View>

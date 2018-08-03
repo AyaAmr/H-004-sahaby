@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import Expo, { Facebook, Notifications } from 'expo';
 import axios from 'axios';
 import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage, Alert, ActivityIndicator, Image, TextInput } from 'react-native';
-import { FONT_WEIGHT, NativePicker } from '../components';
+import { FONT_WEIGHT, NativePicker, HeaderLogin } from '../components';
 // import registerForNotifications from '../services/push_notifications';
 
 
 
-class LoginFourth extends Component {
+class LoginFourth extends HeaderLogin {
   
   constructor(props) {
     super(props);
@@ -15,22 +15,16 @@ class LoginFourth extends Component {
       selected: -1,
     }
   }
-
-  componentDidMount() {
-
-  }
-  setSelectedCountry = (country) => {
-    this.setState({ country });
-  }
-  setSelectedLanguage = (language) => {
-    this.setState({ language });
-  }
  
   render() {
-    
-
     return (
       <View style={styles.container}>
+        <View style={{ position: 'absolute', bottom: 0, right: 0}}>
+          <Image
+            style={{ width: 300, height: 300 }}
+            source={require('../assets/images/bg.png')}
+          />
+        </View>
         <Text style={{ color: '#9B9B9B', fontSize: 14, fontFamily: 'arimo', marginVertical: 35, marginLeft: 15 }} >I need Assistance with</Text>
         <View style={{ alignItems: 'center'}}>
           <View style={{ flexDirection: 'row', marginBottom: 27}}>
@@ -122,6 +116,10 @@ class LoginFourth extends Component {
           }
           else {
             const number = this.state.selected + 1;
+            const { params } = this.props.navigation.state;
+            this.props.navigation.navigate('PersonalInfo', {...params, ...{
+              type_need_id: number}
+            });
           }
         
         }}>
